@@ -1,0 +1,58 @@
+def ssl(a, k):
+    #SSL A, SSL A, k: Сдвиг влево с заполнением нулями.
+    return a[k:] + [False] * k
+
+def srl(a, k):
+    #SRL A, SRL A, k: Сдвиг вправо с заполнением нулями.
+    return [False] * k + a[:-k]
+
+def slc(a):
+    #SLC: Сброс всех битов.
+    return [False] * len(a)
+
+def bitwise_and(a, b):
+    #AND: Логическое И.
+    return [x and y for x, y in zip(a, b)]
+
+def bitwise_or(a, b):
+    #OR: Логическое ИЛИ.
+    return [x or y for x, y in zip(a, b)]
+
+def bitwise_xor(a, b):
+    #XOR: Логическое исключающее ИЛИ.
+    return [x != y for x, y in zip(a, b)]
+
+def bitwise_xnor(a, b):
+    #XNOR: Логическое эквивалентность.
+    return [x == y for x, y in zip(a, b)]
+
+def impl(a, b):
+    #IMPL: Импликация (A -> B).
+    return [not x or y for x, y in zip(a, b)]
+
+def flip(bit_string):
+    #Перевернуть всю битовую строку.
+    return [not bit for bit in bit_string]
+
+def flip_at(bit_string, position):
+    #Перевернуть бит в заданной позиции.
+    if position < 0 or position >= len(bit_string):
+        raise IndexError("Position out of range.")
+    flipped_string = bit_string.copy()
+    flipped_string[position] = not flipped_string[position]
+    return flipped_string
+
+# Примеры использования
+a = [True, False, True]
+b = [False, True, True]
+
+print("SSL:", ssl(a, 1))
+print("SRL:", srl(a, 1))
+print("SLC:", slc(a))
+print("AND:", bitwise_and(a, b))
+print("OR:", bitwise_or(a, b))
+print("XOR:", bitwise_xor(a, b))
+print("XNOR:", bitwise_xnor(a, b))
+print("IMPL:", impl(a, b))
+print("FLIP:", flip(a))
+print("FLIP AT 1:", flip_at(a, 1))
