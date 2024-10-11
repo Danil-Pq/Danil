@@ -1,0 +1,29 @@
+Упражнение №3-4
+if (grep -RIZ “123” target | xargs -0 cp -t . ); then
+echo “cp - OK”
+else 
+echo “cp - FAILS”
+fi
+if (grep -RLZ “123” target | xargs -0 rm); then
+	echo “rm - OK” 
+else 
+echo “rm - FAILS”\
+fi
+
+Упражнение №3-5
+cd dir1
+find . -type f -exec test ! -e ../dir2{} \; -print
+cd ..
+cd dir2
+find . -type f -exec test ! -e ../dir1{} \; -print
+
+Упражнение №3-6
+declare -A configs
+configs[h]="~/.bashrc-home"
+configs[w]="~/.bashrc-work"
+if ["$1"=="h"] || ["$1"=="w"]; then
+  cp ~/"${configs[$1]}" ~/.bashrc
+  source ~/.bashrc
+else
+    echo "файл не найден"
+fi
